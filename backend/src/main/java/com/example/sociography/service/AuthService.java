@@ -51,7 +51,7 @@ public class AuthService {
                 .claim("id", id) // Add the id claim
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 day expiration
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(SignatureAlgorithm.HS512)
                 .compact();
     }
 }
