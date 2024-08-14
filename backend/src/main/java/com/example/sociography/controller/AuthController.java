@@ -13,7 +13,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<User> login(@RequestParam String email, @RequestParam String password) {
         String token = authService.authenticate(email, password);
         if (token != null) {
             return ResponseEntity.ok(token);
