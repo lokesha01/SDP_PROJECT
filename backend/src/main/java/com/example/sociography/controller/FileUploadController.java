@@ -1,11 +1,9 @@
 package com.example.sociography.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.sociography.model.Category;
@@ -28,17 +26,20 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class FileUploadController {
 
-    @Autowired
-    private PhotographerRepository photographerRepository;
+    private final PhotographerRepository photographerRepository;
+    private final PictureRepository pictureRepository;
+    private final CategoryRepository categoryRepository;
+    private final PicCatRepository picCatRepository;
 
-    @Autowired
-    private PictureRepository pictureRepository;
-    
-    @Autowired
-    private CategoryRepository categoryRepository;
-    
-    @Autowired 
-    private PicCatRepository picCatRepository;
+    public FileUploadController(PhotographerRepository photographerRepository,
+                                PictureRepository pictureRepository,
+                                CategoryRepository categoryRepository,
+                                PicCatRepository picCatRepository) {
+        this.photographerRepository = photographerRepository;
+        this.pictureRepository = pictureRepository;
+        this.categoryRepository = categoryRepository;
+        this.picCatRepository = picCatRepository;
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<String> handleFileUpload(@RequestPart("file") MultipartFile file,
