@@ -202,7 +202,7 @@ public class PictureService {
     }
 
     public List<Picture> searchPicturesByDescription(String keyword) {
-        logger.debug("Searching pictures with keyword: {}", keyword);
+        // logger.debug("Searching pictures with keyword: {}", keyword);
         List<Picture> results = pictureRepository.findByDescriptionContaining(keyword);
         logger.debug("Found {} pictures", results.size());
         return results;
