@@ -36,6 +36,8 @@ const PartnerPage = () => {
     fetchPartnerData();
   }, [partnerId]);
 
+  
+
   const handleClickOpen = () => {
     setOpen(true);
   };

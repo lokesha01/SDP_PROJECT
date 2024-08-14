@@ -8,18 +8,13 @@ import ProfileAvatar from '../common/ProfileAvatar';
 const PartnerProfile = () => {
   const partnerData = {
     imageUrl: 'partnerpic.jpg',
-    name: 'Alex Morrison',
+    name: 'PhotoGear Inc.',
     likesCount: 125,
     contactedCount: 45,
     address: '123 Partner Street, City, Country',
     website: 'https://partnerwebsite.com',
     description: `
-      Alex is a highly skilled photographer specializing in landscape and portrait photography. 
-      Known for captivating images and professional services. His work has been featured in 
-      numerous galleries and publications. Alex's attention to detail and creativity sets him 
-      apart in the industry. He is passionate about capturing the beauty of the world through 
-      his lens and continually pushes the boundaries of his craft. Whether it's a stunning 
-      landscape or an intimate portrait, Alex's work always tells a story.
+      Supplier of top-notch photography equipment.
     `,
     tagline: 'Professional Photographer',
   };

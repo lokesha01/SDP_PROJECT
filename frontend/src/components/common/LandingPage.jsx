@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import { Avatar } from '@mui/material';
 import axios from 'axios';
 import { getToken } from './AuthService';
+import { useAuth } from './AuthContext';
 
 const convertToBase64 = (data) => {
   return `data:image/png;base64,${data}`;
@@ -22,6 +23,7 @@ const SocialMediaFeed = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
+  const {authState} = useAuth();
 
   useEffect(() => {
     fetchPosts(page);
@@ -193,6 +195,8 @@ const SocialMediaFeed = () => {
           avatar={convertToBase64(selectedPhoto.photographer?.profilePic)}
           category={selectedPhoto.category}
           comments={selectedPhoto.comments}
+          id={selectedPhoto.id}
+          photographerId={authState.photographerId}
         />
       )}
     </Box>

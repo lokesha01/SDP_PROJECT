@@ -1,6 +1,7 @@
 package com.example.sociography.service;
 
 import com.example.sociography.model.Like;
+import com.example.sociography.model.LikeId;
 import com.example.sociography.repository.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class LikeService {
         return likeRepository.findAll();
     }
 
-    public Optional<Like> findById(Integer id) {
+    public Optional<Like> findById(LikeId id) {
         return likeRepository.findById(id);
     }
 
@@ -26,7 +27,7 @@ public class LikeService {
         return likeRepository.save(like);
     }
 
-    public void deleteById(Integer id) {
+    public void deleteById(LikeId id) {
         likeRepository.deleteById(id);
     }
 }

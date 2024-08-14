@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -7,6 +7,11 @@ import TextField from '@mui/material/TextField';
 import { Container, Box, Menu, MenuItem, Avatar } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import NotificationDropdown from './NotificationDropdown';
+import { useTheme } from '@emotion/react';
+import { useAuth } from './AuthContext';
+import { convertToBase64 } from './convertToBase64';
+import { getToken } from './AuthService';
+import axios from '../common/axiosInstance';
 // Import the logo image
 // import logo from './SocioGraphy-Logo.png'; // Update the path to your logo image
 
@@ -14,6 +19,44 @@ const Navbar = () => {
   const [query, setQuery] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+  const [authenticated, setAuthenticated] = useState(false);
+  const [profilePic, setProfilePic] = useState('');
+  const { darkMode, toggleTheme } = useTheme();
+  const { authState } = useAuth();
+  const { mode, photographerId } = authState;
+
+  useEffect(() => {
+    setAuthenticated(!!getToken());
+
+    // Fetch profile picture based on mode
+    if (mode && (mode === 'partner' || mode === 'photographer')) {
+      axios.get(`/${mode === 'partner' ? 'partners' : 'photographers'}/${photographerId}`)
+        .then(response => {
+          const profileData = response.data;
+          console.log(profileData);
+          console.log("sdjfhdshfbhisdufijk")
+          setProfilePic(convertToBase64(profileData.profilePic) || ''); // Assuming 'profilePic' is the key
+        })
+        .catch(error => {
+          console.error('Error fetching profile picture:', error);
+        });
+    }
+  }, [mode, photographerId]);
+
+
+  // useEffect(() => {
+  //   const fetchPartners = async () => {
+  //     try {
+  //       const response = await axiosInstance.get('/partners'); // Use the axios instance
+  //       setPartners(response.data);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching partners:', error);
+  //     }
+  //   };
+
+  //   fetchPartners();
+  // }, []);
 
   const handleSearchChange = (event) => {
     setQuery(event.target.value);
@@ -88,7 +131,7 @@ const Navbar = () => {
             <NotificationDropdown />
             <Avatar 
               alt="Profile"
-              src="profilepic1.jpg"
+              src={profilePic}
               sx={{ marginLeft: 2, cursor: 'pointer' }}
               onClick={handleAvatarClick}
             />
