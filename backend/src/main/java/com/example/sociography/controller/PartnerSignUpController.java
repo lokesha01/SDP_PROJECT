@@ -36,7 +36,7 @@ public class PartnerSignUpController {
 //    }
     
     @PostMapping(value = "/signup", consumes = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> signUpPartner(
+    public ResponseEntity<User> signUpPartner(
         @RequestParam("name") String name,
         @RequestParam("username") String username,
         @RequestParam("password") String password,
