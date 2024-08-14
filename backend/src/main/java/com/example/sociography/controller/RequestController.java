@@ -17,7 +17,7 @@ public class RequestController {
     private RequestService requestService;
 
     @GetMapping("/photographer/{photographerId}/{status}")
-    public ResponseEntity<?> getRequestsByStatus(
+    public ResponseEntity<User> getRequestsByStatus(
         @PathVariable("photographerId") Long photographerId,
         @PathVariable("status") String status) {
 
