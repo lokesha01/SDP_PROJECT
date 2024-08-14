@@ -17,12 +17,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig {
 
     @Autowired
- //   private JwtRequestFilter jwtRequestFilter;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-           // .csrf(csrf -> csrf.disable()) // Disable CSRF protection
+          
             .authorizeHttpRequests(authorizeRequests -> 
                 authorizeRequests
                     .requestMatchers("/api/auth/login", "/api/partners/signup", "/api/signup/photographer", "/pictures/search").permitAll() // Allow public access to these endpoints
