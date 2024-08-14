@@ -1,7 +1,6 @@
 package com.example.sociography.controller;
 
 import com.example.sociography.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,11 +8,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password) {
         String token = authService.authenticate(email, password);
         if (token != null) {
             return ResponseEntity.ok(token);
