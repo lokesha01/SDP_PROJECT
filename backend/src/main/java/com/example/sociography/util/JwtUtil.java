@@ -9,7 +9,7 @@ public class JwtUtil {
 
     public static Claims extractClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(uthftydytuyiy456789)
+              //  .setSigningKey(uthftydytuyiy456789)
                 .parseClaimsJws(token)
                 .getBody();
     }
